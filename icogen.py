@@ -1,10 +1,13 @@
+#!.pyenv/shims/python
 from PIL import Image
 import os
 import fnmatch
+import pathlib
 
 dir_anime = "/mnt/d/KOLEKSI/NEWANIME"
 pattern = (".jpg", ".png")
 
+cwd = pathlib.Path(os.path.realpath(__file__)).parent
 
 for root, _, files in os.walk(dir_anime):
     for filename in files:
@@ -14,9 +17,9 @@ for root, _, files in os.walk(dir_anime):
             images = [
                 Image.open(x)
                 for x in [
-                    os.path.join(os.path.dirname(__file__), "top.png"),
+                    os.path.join(cwd, "top.png"),
                     img_target,
-                    os.path.join(os.path.dirname(__file__), "bottom.png"),
+                    os.path.join(cwd, "bottom.png"),
                 ]
             ]
 
