@@ -11,7 +11,14 @@ for root, _, files in os.walk(dir_anime):
         if filename.endswith((".jpg", ".png")):
             img_target = os.path.join(root, filename)
             print(" - " + root)
-            images = [Image.open(x) for x in ["top.png", img_target, "bottom.png"]]
+            images = [
+                Image.open(x)
+                for x in [
+                    os.path.join(os.getcwd(), "top.png"),
+                    img_target,
+                    os.path.join(os.getcwd(), "bottom.png"),
+                ]
+            ]
 
             middle_img = images[1].resize((149, 211))
 
