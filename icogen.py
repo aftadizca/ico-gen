@@ -14,9 +14,9 @@ for root, _, files in os.walk(dir_anime):
             images = [
                 Image.open(x)
                 for x in [
-                    os.path.join(os.getcwd(), "top.png"),
+                    os.path.join(os.path.dirname(__file__), "top.png"),
                     img_target,
-                    os.path.join(os.getcwd(), "bottom.png"),
+                    os.path.join(os.path.dirname(__file__), "bottom.png"),
                 ]
             ]
 
