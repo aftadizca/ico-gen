@@ -3,24 +3,18 @@ from PIL import Image
 import os
 import pathlib
 
-dir_anime = "/mnt/d/KOLEKSI/NEWANIME"
 pattern = (".jpg", ".png")
-
 cwd = pathlib.Path(os.path.realpath(__file__)).parent
+dir_anime = "/mnt/d/KOLEKSI/NEWANIME"
+top_img = os.path.join(cwd, "top.png")
+bottom_img = os.path.join(cwd, "bottom.png")
 
 for root, _, files in os.walk(dir_anime):
     for filename in files:
-        if filename.endswith((".jpg", ".png")):
+        if filename.endswith(pattern):
             img_target = os.path.join(root, filename)
             print(" - " + root)
-            images = [
-                Image.open(x)
-                for x in [
-                    os.path.join(cwd, "top.png"),
-                    img_target,
-                    os.path.join(cwd, "bottom.png"),
-                ]
-            ]
+            images = [Image.open(x) for x in [top_img, img_target, bottom_img]]
 
             middle_img = images[1].resize((149, 211), Image.LANCZOS)
 
