@@ -1,4 +1,10 @@
-import io, math, pathlib, os, json, urllib.request, requests
+import io
+import math
+import pathlib
+import os
+import json
+import urllib.request
+import requests
 from params import animation, cwd, url, query
 
 
@@ -9,7 +15,8 @@ def getImg(title, path):
     img_url = json_data["data"]["Media"]["coverImage"]["extraLarge"]
 
     # start request
-    req = urllib.request.Request(img_url, headers={"User-Agent": "Mozilla/5.0"})
+    req = urllib.request.Request(
+        img_url, headers={"User-Agent": "Mozilla/5.0"})
     opener = urllib.request.urlopen(req)
     length = opener.getheader("Content-Length")
     # initialize reading blocksize
@@ -43,4 +50,4 @@ def getImg(title, path):
     return img_url
 
 
-getImg("OreImo", os.path.join(cwd, "test.jpg"))
+# getImg("OreImo", os.path.join(cwd, "test.jpg"))
