@@ -3,6 +3,7 @@ from PIL import Image
 import os
 import pathlib
 from query import getImg
+from params import animation
 
 pattern = (".jpg", ".png")
 cwd = pathlib.Path(os.path.realpath(__file__)).parent
@@ -30,8 +31,16 @@ for root, dirs, files in os.walk(dir_anime):
             img_target = os.path.join(root, folder_name, "icon.jpg")
             if os.path.isfile(img_target):
                 icon_generator(top_img, img_target, bottom_img)
-                print(f"-{os.path.join(root, folder_name):<70} \tIco Already Exist")
+                print(
+                    "\r [♥]{0:<70} {1:15}".format(
+                        os.path.join(root, folder_name),
+                        animation[9],
+                    ),
+                    flush=True,
+                    end="",
+                )
+                print()
             else:
                 getImg(folder_name, img_target)
                 icon_generator(top_img, img_target, bottom_img)
-                print(f"-{os.path.join(root, folder_name):<70} \tDone")
+                # print(f"-{os.path.join(root, folder_name):<70} \tDone")
