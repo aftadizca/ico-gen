@@ -1,18 +1,5 @@
 import io, math, pathlib, os, json, urllib.request, requests
-from params import animation, cwd
-
-url = "https://graphql.anilist.co"
-query = """query ($search: String){
-  Media(search: $search, type:ANIME) {
-    id
-    coverImage {
-      extraLarge
-    }
-    title {
-      romaji
-    }
-  }
-}"""
+from params import animation, cwd, url, query
 
 
 def getImg(title, path):
@@ -56,4 +43,4 @@ def getImg(title, path):
     return img_url
 
 
-# getImg("OreImo", os.path.join(cwd, "test.jpg"))
+getImg("OreImo", os.path.join(cwd, "test.jpg"))
