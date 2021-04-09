@@ -6,7 +6,7 @@ import pathlib
 
 url = "https://graphql.anilist.co"
 query = """query ($search: String){
-  Media(search: $search) {
+  Media(search: $search, type:ANIME) {
     id
     coverImage {
       extraLarge

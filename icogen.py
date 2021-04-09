@@ -19,7 +19,7 @@ def icon_generator(top_img, img_target, bottom_img):
     new_img.paste(middle_img, (31, 16))
 
     alphaComposite = Image.alpha_composite(new_img, images[0])
-    alphaComposite.save(os.path.join(root, "a.ico"))
+    alphaComposite.save(os.path.join(pathlib.Path(img_target).parent, "a.ico"))
 
 
 for root, dirs, files in os.walk(dir_anime):
