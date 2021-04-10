@@ -1,11 +1,9 @@
-import io
 import math
 import pathlib
-import os
 import json
 import urllib.request
 import requests
-from params import animation, cwd, url, query
+from params import animation, query, url
 
 
 def getImg(title, path):
@@ -38,9 +36,9 @@ def getImg(title, path):
             size += len(buf1)
             f.write(buf1)
             print(
-                "\r [♥]{0:<70} {1:15}".format(
+                "\r ☕ {0:<70} {1:>15} {2:6}KB".format(
                     str(pathlib.Path(path).parent),
-                    animation[round(size / length * 10) - 1],
+                    animation[round(size / length * 10) - 1], round(size/1000)
                 ),
                 flush=True,
                 end="",

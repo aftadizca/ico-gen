@@ -2,14 +2,10 @@
 from PIL import Image
 import os
 import pathlib
+import time
+import argparse
 from query import getImg
-from params import animation
-
-pattern = (".jpg", ".png")
-cwd = pathlib.Path(os.path.realpath(__file__)).parent
-dir_anime = "/mnt/d/KOLEKSI/NEWANIME"
-top_img = os.path.join(cwd, "top.png")
-bottom_img = os.path.join(cwd, "bottom.png")
+from params import animation, cwd, top_img, bottom_img, dir_anime
 
 
 def icon_generator(top_img, img_target, bottom_img):
@@ -23,18 +19,25 @@ def icon_generator(top_img, img_target, bottom_img):
     alphaComposite.save(os.path.join(pathlib.Path(img_target).parent, "a.ico"))
 
 
+parser = argparse.ArgumentParser(
+    description="Auto download cover from Anilist.co & make folder icon")
+parser.add_argument('-f', '--force', dest='force',
+                    action='store_false', help="Force to redownload icon image")
+args = parser.parse_args()
+
+
 for root, dirs, files in os.walk(dir_anime):
     for folder_name in dirs:
         if folder_name == "1. new":
             continue
         else:
             img_target = os.path.join(root, folder_name, "icon.jpg")
-            if os.path.isfile(img_target):
+            if os.path.isfile(img_target) and args.force:
                 icon_generator(top_img, img_target, bottom_img)
                 print(
-                    "\r [♥]{0:<70} {1:15}".format(
+                    "\r ☕ {0:<70} {1:>5}".format(
                         os.path.join(root, folder_name),
-                        animation[9],
+                        "✅",
                     ),
                     flush=True,
                     end="",
