@@ -36,7 +36,7 @@ def getImg(title, path):
             size += len(buf1)
             f.write(buf1)
             print(
-                "\r ☕ {0:<70} {1:>15} {2:6}KB".format(
+                "\r ☕ {0:<64} {1:>15} {2:6}KB".format(
                     str(pathlib.Path(path).parent),
                     animation[round(size / length * 10) - 1], round(size/1000)
                 ),

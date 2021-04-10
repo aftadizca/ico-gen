@@ -35,7 +35,7 @@ for root, dirs, files in os.walk(dir_anime):
             if os.path.isfile(img_target) and args.force:
                 icon_generator(top_img, img_target, bottom_img)
                 print(
-                    "\r ☕ {0:<70} {1:>5}".format(
+                    "\r ☕ {0:<64} {1:>5}".format(
                         os.path.join(root, folder_name),
                         "✅",
                     ),
