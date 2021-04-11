@@ -3,12 +3,13 @@ import pathlib
 import json
 import urllib.request
 import requests
-from params import animation, query, url
+from params import animation, cwd, cfg
 
 
 def getImg(title, path):
     vars = {"search": title}
-    response = requests.post(url, json={"query": query, "variables": vars})
+    response = requests.post(
+        cfg['api']['url'], json={"query": cfg['api']['query'], "variables": vars})
     json_data = json.loads(response.text)
     img_url = json_data["data"]["Media"]["coverImage"]["extraLarge"]
 
@@ -46,6 +47,3 @@ def getImg(title, path):
         print()
 
     return img_url
-
-
-# getImg("OreImo", os.path.join(cwd, "test.jpg"))

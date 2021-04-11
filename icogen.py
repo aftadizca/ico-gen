@@ -2,10 +2,9 @@
 from PIL import Image
 import os
 import pathlib
-import time
 import argparse
 from query import getImg
-from params import animation, cwd, top_img, bottom_img, dir_anime
+from params import animation, cwd, top_img, bottom_img, cfg
 
 
 def icon_generator(top_img, img_target, bottom_img):
@@ -26,24 +25,25 @@ parser.add_argument('-f', '--force', dest='force',
 args = parser.parse_args()
 
 
-for root, dirs, files in os.walk(dir_anime):
+for root, dirs, files in os.walk(cfg['directory']['anime']):
+
+    for exclude in cfg['directory']['exclude']:
+        if dirs:
+            dirs.remove(exclude)
+
     for folder_name in dirs:
-        if folder_name == "1. new":
-            continue
+        img_target = os.path.join(root, folder_name, "icon.jpg")
+        if os.path.isfile(img_target) and args.force:
+            icon_generator(top_img, img_target, bottom_img)
+            print(
+                "\r ☕ {0:<64} {1:>5}".format(
+                    os.path.join(root, folder_name),
+                    "✅",
+                ),
+                flush=True,
+                end="",
+            )
+            print()
         else:
-            img_target = os.path.join(root, folder_name, "icon.jpg")
-            if os.path.isfile(img_target) and args.force:
-                icon_generator(top_img, img_target, bottom_img)
-                print(
-                    "\r ☕ {0:<64} {1:>5}".format(
-                        os.path.join(root, folder_name),
-                        "✅",
-                    ),
-                    flush=True,
-                    end="",
-                )
-                print()
-            else:
-                getImg(folder_name, img_target)
-                icon_generator(top_img, img_target, bottom_img)
-                # print(f"-{os.path.join(root, folder_name):<70} \tDone")
+            getImg(folder_name, img_target)
+            icon_generator(top_img, img_target, bottom_img)
