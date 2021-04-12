@@ -26,17 +26,17 @@ args = parser.parse_args()
 
 
 for root, dirs, files in os.walk(cfg['directory']['anime']):
-
     for exclude in cfg['directory']['exclude']:
-        if dirs:
+        try:
             dirs.remove(exclude)
-
+        except ValueError:
+            pass
     for folder_name in dirs:
         img_target = os.path.join(root, folder_name, "icon.jpg")
         if os.path.isfile(img_target) and args.force:
             icon_generator(top_img, img_target, bottom_img)
             print(
-                "\r ☕ {0:<64} {1:>5}".format(
+                "\r ☕ {0:<70} {1:>5}".format(
                     os.path.join(root, folder_name),
                     "✅",
                 ),
@@ -47,3 +47,4 @@ for root, dirs, files in os.walk(cfg['directory']['anime']):
         else:
             getImg(folder_name, img_target)
             icon_generator(top_img, img_target, bottom_img)
+    break  # disable recursive
