@@ -3,7 +3,7 @@ import pathlib
 import json
 import urllib.request
 import requests
-from params import animation, cwd, cfg
+from lib.params import animation, cwd, cfg
 
 
 def getImg(title, path):

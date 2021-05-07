@@ -3,11 +3,13 @@
 
 block_cipher = None
 
+add_data = [("config.toml", "."), ("img", "img")]
+
 
 a = Analysis(['icogen.py'],
              pathex=['/home/zaha/programming/ico-gen'],
              binaries=[],
-             datas=[("config.toml",".")],
+             datas=add_data,
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -17,7 +19,7 @@ a = Analysis(['icogen.py'],
              cipher=block_cipher,
              noarchive=False)
 pyz = PYZ(a.pure, a.zipped_data,
-             cipher=block_cipher)
+          cipher=block_cipher)
 exe = EXE(pyz,
           a.scripts,
           [],
@@ -27,7 +29,7 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=True )
+          console=True)
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,

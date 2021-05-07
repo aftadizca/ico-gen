@@ -1,18 +1,7 @@
 [api]
 url = "https://graphql.anilist.co"
-query="""query ($search: String){ 
-  Media(search: $search, type:ANIME) { 
-    id 
-    coverImage {
-      extraLarge
-    }
-    title {
-      romaji
-    }
-  }
-}"""
-
+query = "query ($search: String){ Media(search: $search, type:ANIME) { id coverImage{extraLarge} title{romaji} }}"
 
 [directory]
-anime='/mnt/d/KOLEKSI/NEWANIME'
-exclude=["1. new"]
+anime = "/mnt/d/KOLEKSI/NEWANIME"
+exclude = [ "1. new",]
