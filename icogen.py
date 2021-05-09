@@ -1,4 +1,4 @@
-#!.pyenv/shims/python
+#!/usr/bin/env python
 from PIL import Image
 import os
 import pathlib
@@ -32,18 +32,12 @@ set_parser.add_argument('-d', '--dir', type=str, action='store', default=None,
 set_parser.add_argument('-e', '--exclude', nargs="*", action='store', default=None,
                         help="Set exluded folder in anime dir location")
 
-args = parser.parse_args()
-
-
-def setConfig(data, parent, name, value):
-    cfg[parent][name] = value
-    with open(cfg_file, "w") as t:
-        toml.dump(cfg, t)
-
+args = parser.parse_args(["start", "-f"])
+print(args)
 
 if args.name == "start":
-    for root, dirs, files in os.walk(cfg['directory']['anime']):
-        for exclude in cfg['directory']['exclude']:
+    for root, dirs, files in os.walk(cfg.get("dir", "anime")):
+        for exclude in cfg.get("dir", "exclude"):
             try:
                 dirs.remove(exclude)
             except ValueError:
@@ -67,6 +61,8 @@ if args.name == "start":
         break  # disable recursive
 if args.name == "set":
     if args.dir:
-        setConfig(cfg, "directory", "anime", args.dir)
+        cfg.set("dir", "anime", args.dir)
+        cfg.save()
     elif args.exclude:
-        setConfig(cfg, "directory", "exclude", args.exclude)
+        cfg.set("dir", "exclude", args.exclude)
+        cfg.save()

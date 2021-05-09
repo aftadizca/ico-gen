@@ -9,7 +9,10 @@ from lib.params import animation, cwd, cfg
 def getImg(title, path):
     vars = {"search": title}
     response = requests.post(
-        cfg['api']['url'], json={"query": cfg['api']['query'], "variables": vars})
+        cfg.get("api", "url"),
+        json={"query": cfg.get("api", "query"), "variables": vars}
+    )
+
     json_data = json.loads(response.text)
     img_url = json_data["data"]["Media"]["coverImage"]["extraLarge"]
 

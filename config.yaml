@@ -1,0 +1,8 @@
+api:
+  url: https://graphql.anilist.co
+  query: "query ($search: String){ Media(search: $search, type:ANIME) { id coverImage{extraLarge} title{romaji} }}"
+
+dir:
+  anime: /mnt/d/KOLEKSI/NEWANIME
+  exclude:
+    - 1. new
