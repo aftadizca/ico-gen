@@ -3,7 +3,6 @@ from PIL import Image
 import os
 import pathlib
 import argparse
-import toml
 from lib.query import getImg
 from lib.params import animation, cwd, top_img, bottom_img, cfg, cfg_file
 
@@ -32,7 +31,7 @@ set_parser.add_argument('-d', '--dir', type=str, action='store', default=None,
 set_parser.add_argument('-e', '--exclude', nargs="*", action='store', default=None,
                         help="Set exluded folder in anime dir location")
 
-args = parser.parse_args(["start", "-f"])
+args = parser.parse_args(["start"])
 print(args)
 
 if args.name == "start":
