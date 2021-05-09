@@ -25,14 +25,13 @@ init_parser = sub_parser.add_parser("start", help="Start make folder icon")
 init_parser.add_argument('-f', '--force', action='store_true',
                          help="Force to redownload icon image")
 
-set_parser = sub_parser.add_parser("set", help="Start make folder icon")
+set_parser = sub_parser.add_parser("set", help="Setting config")
 set_parser.add_argument('-d', '--dir', type=str, action='store', default=None,
                         help="Set anime dir location")
 set_parser.add_argument('-e', '--exclude', nargs="*", action='store', default=None,
                         help="Set exluded folder in anime dir location")
 
-args = parser.parse_args(["start"])
-print(args)
+args = parser.parse_args()
 
 if args.name == "start":
     for root, dirs, files in os.walk(cfg.get("dir", "anime")):
@@ -62,6 +61,6 @@ if args.name == "set":
     if args.dir:
         cfg.set("dir", "anime", args.dir)
         cfg.save()
-    elif args.exclude:
+    if args.exclude:
         cfg.set("dir", "exclude", args.exclude)
         cfg.save()
